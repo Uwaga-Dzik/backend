@@ -18,10 +18,12 @@ class DeployController extends Controller
         $localToken = config('app.deploy_secret');
         $localHash = 'sha1=' . hash_hmac('sha1', $githubPayload, $localToken, false);
 
-        $jResponse = json_decode($githubPayload, true);
-        Log::info("githubpayload: ".$jResponse['action']);
-        Log::info("githubpayload: ".$githubPayload);
-        Log::info("github name: ".$jResponse['repository']['full_name']);
+        $jResponse = json_decode($githubPayload);
+        Log::info("githubpayload: ".$jResponse->ref);
+        Log::info("githubpayload: ".$jResponse->action);
+        Log::info("githubpayload: ".$jResponse->pull_request->merged);
+        Log::info("githubpayload: ".$jResponse->repository);
+        Log::info("githubpayload: ".$jResponse->repository->full_name);
 
 
         if (hash_equals($githubHash, $localHash)) {
