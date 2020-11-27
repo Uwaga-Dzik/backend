@@ -15,7 +15,7 @@ class TestController extends Controller
     public function test(){
         return response()->json(array(
            'status' => 200,
-            'message' => "wersja nie wiem ktora CI CD"
+            'message' => "wersja nie wasdasdasdiem ktora CI CD"
         ));
     }
 }
