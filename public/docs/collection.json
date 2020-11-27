@@ -1,0 +1,45 @@
+{
+    "variables": [],
+    "info": {
+        "name": "Uwagadzik API",
+        "_postman_id": "1b843531-99b2-4939-8a90-fd1d1f919693",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "general",
+            "description": "",
+            "item": [
+                {
+                    "name": "api\/test",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost\/uwagadzik\/backend",
+                            "path": "api\/test",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                }
+            ]
+        }
+    ]
+}
