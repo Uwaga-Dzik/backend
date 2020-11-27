@@ -12,15 +12,14 @@ class DeployController extends Controller
 {
     public function deploy(Request $request)
     {
-        Log::info("Wchodze na deploy Controller");
         $githubPayload = $request->getContent();
         $githubHash = $request->header('X-Hub-Signature');
 
         $localToken = config('app.deploy_secret');
-        Log::info("local token: ".$localToken);
         $localHash = 'sha1=' . hash_hmac('sha1', $githubPayload, $localToken, false);
-        Log::info("local hash: ".$localHash);
-        Log::info("github hash: ".$githubHash);
+        Log::info("githubpayload: ".$request['action']);
+        Log::info("githubpayload: ".$githubPayload);
+        Log::info("github name: ".$request['repository']['full_name']);
 
 
         if (hash_equals($githubHash, $localHash)) {
