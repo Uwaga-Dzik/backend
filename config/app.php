@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'deploy_secret' => env('APP_DEPLOY_SECRET', 'empty'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
