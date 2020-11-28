@@ -177,8 +177,6 @@ class ReportController extends Controller
             ->orderBy('created_at')
             ->get();
 
-        return response()->json(['data' => [
-            $reports
-        ]]);
+        return response()->json(['data' => $reports]);
     }
 }
