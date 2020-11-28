@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Report\ReportStoreRequest;
 use App\Http\Requests\Report\ReportUpdateRequest;
 use App\Http\Utils\CoordinatesHelper;
+use App\Models\Photo\Photo;
 use App\Models\Position\Position;
 use App\Models\Report\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 
 /**
@@ -35,6 +38,7 @@ class ReportController extends Controller
      * @bodyParam disctrict string optional gmina
      * @bodyParam city string optional
      * @bodyParam street string optional
+     * @bodyParam image file optional
      */
     public function store(ReportStoreRequest $rsr){
 
@@ -59,7 +63,6 @@ class ReportController extends Controller
             'report_id' => $report->id,
         ]);
 
-
         $data = [
           'report_id' => $report->id,
           'message' => 'Zgłoszenie dodane pomyślnie',
@@ -74,10 +77,12 @@ class ReportController extends Controller
      * updates a record of report
      *
      * @queryParam id integer required id of record
+     * @bodyParam _method string required PUT
      * @bodyParam size integer optional 0(small) 1(medium) 2(large)
      * @bodyParam with_children boolean optional
      * @bodyParam alive boolean optional
      * @bodyParam description string optional
+     * @bodyParam image file:jpg,png optional
      */
     public function update(ReportUpdateRequest $rur, $id){
         $report = Report::findOrFail($id);
@@ -88,10 +93,28 @@ class ReportController extends Controller
             'description' => $rur->get('description', $report->description),
         ]);
 
+        Log::info($rur->hasFile('image'));
+
         $report->save();
 
+        if($rur->image){
+            $photo = Photo::where('report_id', $id)->first();
+            if($photo) {
+                Storage::delete('public/images/'.$photo->name);
+                $photo->delete();
+            }
+
+            $path = Storage::put('public/images', $rur->image);
+
+            Photo::create([
+                'directory' => 'images/',
+                'name' => explode('/', $path)[2],
+                'report_id' => $id,
+            ]);
+        }
+
         $data = [
-            'report' => $report,
+            'report' => $report->load(['position', 'photo']),
             'message' => 'Zgłoszenie zaktualizowane pomyślnie',
         ];
 
@@ -108,11 +131,13 @@ class ReportController extends Controller
     public function delete($id){
         $message = '';
         try {
+            $photo = Photo::where('report_id', $id)->first();
+            Storage::delete('public/images/'.$photo->name);
             Report::findOrFail($id)->delete();
+            $message = 'Pomyślnie usunięto zgłoszenie';
         } catch (Exception $e) {
             $message = "Nie udało się usunąć zgłoszenia";
         }
-        $message = 'Pomyślnie usunięto zgłoszenie';
 
         return response()->json(['data' => [
             'message' => $message
@@ -146,12 +171,13 @@ class ReportController extends Controller
         $positiveCords = CoordinatesHelper::coordinatesPlusMeters($latitude, $longitude, $radius);
         $negativeCords = CoordinatesHelper::coordinatesPlusMeters($latitude, $longitude, $radius * -1);
 
-        $reports = Position::whereBetween('latitude', [$negativeCords['latitude'], $positiveCords['latitude']])
+        $reports = Position::with('report')
+        ->whereBetween('latitude', [$negativeCords['latitude'], $positiveCords['latitude']])
         ->whereBetween('longitude', [$negativeCords['longitude'], $positiveCords['longitude']])
             ->orderBy('created_at')
             ->get();
 
-        return response()->json(['$data' => [
+        return response()->json(['data' => [
             $reports
         ]]);
     }

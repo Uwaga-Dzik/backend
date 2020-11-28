@@ -29,6 +29,7 @@ class ReportUpdateRequest extends FormRequest
             'with_children' => 'nullable|boolean',
             'alive' => 'nullable|boolean',
             'description' => 'nullable|string',
+            'image' => 'nullable|file|mimes:jpeg,png',
         ];
     }
 }
