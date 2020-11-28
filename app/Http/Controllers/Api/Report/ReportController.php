@@ -64,7 +64,7 @@ class ReportController extends Controller
         ]);
 
         $data = [
-          'report_id' => $report->id,
+          'report_id' => $report->load('position'),
           'message' => 'Zgłoszenie dodane pomyślnie',
         ];
 
