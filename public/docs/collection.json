@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Uwagadzik API",
-        "_postman_id": "b16c4b6a-c77c-402a-90bb-6cf9be882713",
+        "_postman_id": "4abd363d-c0aa-4044-9f3e-5f7d4e4b3312",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -33,7 +33,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"nickname\": \"et\",\n    \"email\": \"harum\",\n    \"password\": \"ipsum\",\n    \"password_confirmation\": \"labore\"\n}"
+                            "raw": "{\n    \"nickname\": \"ipsa\",\n    \"email\": \"est\",\n    \"password\": \"aut\",\n    \"password_confirmation\": \"non\"\n}"
                         },
                         "description": "Registers new user",
                         "response": []
@@ -61,7 +61,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"nickname\": \"facilis\",\n    \"password\": \"vel\"\n}"
+                            "raw": "{\n    \"nickname\": \"et\",\n    \"password\": \"a\"\n}"
                         },
                         "description": "Login user using credentials",
                         "response": []
@@ -605,7 +605,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"is_tracks\": false,\n    \"latitude\": 82.95208246,\n    \"longitude\": 332,\n    \"country\": \"maxime\",\n    \"voivodeship\": \"id\",\n    \"subregion\": \"voluptas\",\n    \"disctrict\": \"modi\",\n    \"city\": \"id\",\n    \"street\": \"est\"\n}"
+                            "raw": "{\n    \"is_tracks\": false,\n    \"latitude\": 250880024,\n    \"longitude\": 0.977796991,\n    \"country\": \"nihil\",\n    \"voivodeship\": \"voluptatibus\",\n    \"subregion\": \"aliquam\",\n    \"disctrict\": \"temporibus\",\n    \"city\": \"officia\",\n    \"street\": \"deleniti\",\n    \"image\": \"veniam\"\n}"
                         },
                         "description": "add new record of report with localization\n\nreturns id of new report",
                         "response": []
@@ -621,7 +621,7 @@
                             "query": [
                                 {
                                     "key": "id",
-                                    "value": "neque",
+                                    "value": "accusamus",
                                     "description": "integer required id of record",
                                     "disabled": false
                                 }
@@ -640,7 +640,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"size\": 7,\n    \"with_children\": true,\n    \"alive\": true,\n    \"description\": \"ab\"\n}"
+                            "raw": "{\n    \"_method\": \"dolorem\",\n    \"size\": 17,\n    \"with_children\": false,\n    \"alive\": true,\n    \"description\": \"sunt\",\n    \"image\": \"cum\"\n}"
                         },
                         "description": "updates a record of report",
                         "response": []
@@ -656,7 +656,7 @@
                             "query": [
                                 {
                                     "key": "id",
-                                    "value": "suscipit",
+                                    "value": "in",
                                     "description": "integer required id of record",
                                     "disabled": false
                                 }
@@ -691,19 +691,19 @@
                             "query": [
                                 {
                                     "key": "latitude",
-                                    "value": "consequatur",
-                                    "description": "float required",
-                                    "disabled": false
-                                },
-                                {
-                                    "key": "longitude",
                                     "value": "assumenda",
                                     "description": "float required",
                                     "disabled": false
                                 },
                                 {
+                                    "key": "longitude",
+                                    "value": "est",
+                                    "description": "float required",
+                                    "disabled": false
+                                },
+                                {
                                     "key": "radius",
-                                    "value": "quod",
+                                    "value": "consequatur",
                                     "description": "float required",
                                     "disabled": false
                                 }

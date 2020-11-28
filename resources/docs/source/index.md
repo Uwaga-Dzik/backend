@@ -36,7 +36,7 @@ curl -X POST \
     "http://localhost/uwagadzik/backend/auth/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"nickname":"et","email":"harum","password":"ipsum","password_confirmation":"labore"}'
+    -d '{"nickname":"ipsa","email":"est","password":"aut","password_confirmation":"non"}'
 
 ```
 
@@ -51,10 +51,10 @@ let headers = {
 };
 
 let body = {
-    "nickname": "et",
-    "email": "harum",
-    "password": "ipsum",
-    "password_confirmation": "labore"
+    "nickname": "ipsa",
+    "email": "est",
+    "password": "aut",
+    "password_confirmation": "non"
 }
 
 fetch(url, {
@@ -93,7 +93,7 @@ curl -X POST \
     "http://localhost/uwagadzik/backend/auth/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"nickname":"facilis","password":"vel"}'
+    -d '{"nickname":"et","password":"a"}'
 
 ```
 
@@ -108,8 +108,8 @@ let headers = {
 };
 
 let body = {
-    "nickname": "facilis",
-    "password": "vel"
+    "nickname": "et",
+    "password": "a"
 }
 
 fetch(url, {
@@ -891,7 +891,7 @@ curl -X POST \
     "http://localhost/uwagadzik/backend/report" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"is_tracks":false,"latitude":82.95208246,"longitude":332,"country":"maxime","voivodeship":"id","subregion":"voluptas","disctrict":"modi","city":"id","street":"est"}'
+    -d '{"is_tracks":false,"latitude":250880024,"longitude":0.977796991,"country":"nihil","voivodeship":"voluptatibus","subregion":"aliquam","disctrict":"temporibus","city":"officia","street":"deleniti","image":"veniam"}'
 
 ```
 
@@ -907,14 +907,15 @@ let headers = {
 
 let body = {
     "is_tracks": false,
-    "latitude": 82.95208246,
-    "longitude": 332,
-    "country": "maxime",
-    "voivodeship": "id",
-    "subregion": "voluptas",
-    "disctrict": "modi",
-    "city": "id",
-    "street": "est"
+    "latitude": 250880024,
+    "longitude": 0.977796991,
+    "country": "nihil",
+    "voivodeship": "voluptatibus",
+    "subregion": "aliquam",
+    "disctrict": "temporibus",
+    "city": "officia",
+    "street": "deleniti",
+    "image": "veniam"
 }
 
 fetch(url, {
@@ -943,6 +944,7 @@ Parameter | Type | Status | Description
         `disctrict` | string |  optional  | optional gmina
         `city` | string |  optional  | optional
         `street` | string |  optional  | optional
+        `image` | file |  optional  | optional
     
 <!-- END_e6e6c1d8554f35a2b7ff48374ad1e77b -->
 
@@ -955,10 +957,10 @@ updates a record of report
 
 ```bash
 curl -X PUT \
-    "http://localhost/uwagadzik/backend/report/1?id=neque" \
+    "http://localhost/uwagadzik/backend/report/1?id=accusamus" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"size":7,"with_children":true,"alive":true,"description":"ab"}'
+    -d '{"_method":"dolorem","size":17,"with_children":false,"alive":true,"description":"sunt","image":"cum"}'
 
 ```
 
@@ -968,7 +970,7 @@ const url = new URL(
 );
 
 let params = {
-    "id": "neque",
+    "id": "accusamus",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -979,10 +981,12 @@ let headers = {
 };
 
 let body = {
-    "size": 7,
-    "with_children": true,
+    "_method": "dolorem",
+    "size": 17,
+    "with_children": false,
     "alive": true,
-    "description": "ab"
+    "description": "sunt",
+    "image": "cum"
 }
 
 fetch(url, {
@@ -1007,10 +1011,12 @@ Parameter | Status | Description
 #### Body Parameters
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    `size` | integer |  optional  | optional 0(small) 1(medium) 2(large)
+    `_method` | string |  required  | PUT
+        `size` | integer |  optional  | optional 0(small) 1(medium) 2(large)
         `with_children` | boolean |  optional  | optional
         `alive` | boolean |  optional  | optional
         `description` | string |  optional  | optional
+        `image` | file:jpg,png |  optional  | optional
     
 <!-- END_f9d66bf1dbb6e44c8354f50b7e9db49f -->
 
@@ -1023,7 +1029,7 @@ deletes a record of report
 
 ```bash
 curl -X DELETE \
-    "http://localhost/uwagadzik/backend/report/1?id=suscipit" \
+    "http://localhost/uwagadzik/backend/report/1?id=in" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -1034,7 +1040,7 @@ const url = new URL(
 );
 
 let params = {
-    "id": "suscipit",
+    "id": "in",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -1074,7 +1080,7 @@ returns all positions with reports based on given coordinates and in between giv
 
 ```bash
 curl -X GET \
-    -G "http://localhost/uwagadzik/backend/report/1/1/1?latitude=consequatur&longitude=assumenda&radius=quod" \
+    -G "http://localhost/uwagadzik/backend/report/1/1/1?latitude=assumenda&longitude=est&radius=consequatur" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -1085,9 +1091,9 @@ const url = new URL(
 );
 
 let params = {
-    "latitude": "consequatur",
-    "longitude": "assumenda",
-    "radius": "quod",
+    "latitude": "assumenda",
+    "longitude": "est",
+    "radius": "consequatur",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
