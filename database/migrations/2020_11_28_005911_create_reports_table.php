@@ -22,8 +22,6 @@ class CreateReportsTable extends Migration
             $table->text("description")->nullable();
             $table->unsignedBigInteger("user_id");
             $table->foreign("user_id")->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger("position_id");
-            $table->foreign("position_id")->references('id')->on('positions')->onDelete('cascade');
             $table->timestamps();
         });
     }

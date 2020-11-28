@@ -15,14 +15,16 @@ class CreatePositionsTable extends Migration
     {
         Schema::create('positions', function (Blueprint $table) {
             $table->id();
-            $table->float('latitude');
-            $table->float('longitude');
+            $table->double('latitude');
+            $table->double('longitude');
             $table->string('country')->nullable();
             $table->string('voivodeship')->nullable();
             $table->string('subregion')->nullable();
             $table->string('disctrict')->nullable();
             $table->string('city')->nullable();
             $table->string('street')->nullable();
+            $table->unsignedBigInteger("report_id");
+            $table->foreign("report_id")->references('id')->on('reports')->onDelete('cascade');
             $table->timestamps();
         });
     }
