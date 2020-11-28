@@ -4,6 +4,7 @@ namespace App\Models\Photo;
 
 use App\Models\Report\Report;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * App\Models\Photo\Photo

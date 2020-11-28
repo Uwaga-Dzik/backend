@@ -99,7 +99,8 @@ class AuthController extends Controller
      * return user data based on sended token
      */
     public function me(){
-        $user = Auth::user();
+        $user = User::with(['reports','reports.position', 'reports.photo'])->where('id', '=', Auth::id())->first();
+//        $user = Auth::user()->;
         return response()->json(['data' => ['user' => $user]]);
     }
 
